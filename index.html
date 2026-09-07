@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://script.google.com https://script.googleusercontent.com; connect-src https://script.google.com https://script.googleusercontent.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://static.bangkokhospital.com; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#0067b1">
+  <title>U-PMAS Short | โรงพยาบาลกรุงเทพหาดใหญ่</title>
+  <link rel="icon" type="image/jpeg" href="https://static.bangkokhospital.com/uploads/2024/04/backupcoverimg.jpg">
+  <link rel="apple-touch-icon" href="https://static.bangkokhospital.com/uploads/2024/04/backupcoverimg.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="brand-bar"></div>
+<header class="site-header print-hide">
+  <div class="header-inner">
+    <a class="brand-lockup" href="#" aria-label="Bangkok Hospital Hatyai">
+      <img class="hospital-logo" src="assets/bhh-logo.png" alt="Bangkok Hospital Hatyai">
+    </a>
+    <button class="menu-button" type="button" aria-label="เมนู" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<main>
+  <div id="systemModeBanner" class="notice warning hidden print-hide" role="status"></div>
+
+  <section id="landingScreen" class="screen">
+    <div class="mobile-shell landing-shell">
+      <div class="landing-intro">
+        <h1>U-PMAS</h1>
+        <h2>แบบประเมินความเสี่ยง<br>โรคภูมิแพ้ในเด็กเบื้องต้น</h2>
+        <p>โดยโรงพยาบาลกรุงเทพหาดใหญ่</p>
+        <blockquote>“ห่วงใย... สุขภาพที่ดีที่สุด<br>ของลูกน้อย”</blockquote>
+      </div>
+      <div class="hero-photo-frame">
+        <img class="hero-photo" src="assets/hero-mother-child-photo.png" alt="คุณแม่และลูกน้อย">
+      </div>
+      <div class="benefit-list mockup-benefits" aria-label="จุดเด่นของแบบประเมิน">
+        <div class="benefit-item mockup-benefit"><span class="icon-circle shield" aria-hidden="true">✓</span><div><strong>ประเมินง่าย ใช้เวลาไม่นาน</strong></div></div>
+        <div class="benefit-item mockup-benefit"><span class="icon-circle heart" aria-hidden="true">♡</span><div><strong>ไม่ต้องกรอกชื่อก่อนเริ่ม</strong></div></div>
+        <div class="benefit-item mockup-benefit"><span class="icon-circle doctor" aria-hidden="true">♙</span><div><strong>มีแพทย์ผู้เชี่ยวชาญด้านภูมิแพ้เด็ก<br>รองรับการดูแลต่อเนื่อง</strong></div></div>
+      </div>
+      <div id="landingError" class="error-box hidden" role="alert"></div>
+      <button id="startButton" class="btn mockup-primary btn-large" type="button">เริ่มประเมินเลย <span aria-hidden="true">›</span></button>
+      <p class="micro-disclaimer">แบบประเมินนี้ไม่ใช่การวินิจฉัยโรค<br>หากมีข้อกังวล ควรปรึกษาแพทย์</p>
+    </div>
+  </section>
+
+  <section id="pdpaScreen" class="screen hidden">
+    <div class="mobile-shell pdpa-shell">
+      <div class="pdpa-heading">
+        <h2>ข้อตกลงการใช้ข้อมูลส่วนบุคคล<br>(PDPA)</h2>
+      </div>
+      <div class="pdpa-card">
+        <div class="pdpa-title-row"><div class="privacy-lock" aria-hidden="true">▣</div><h3>ข้อมูลของคุณสำคัญสำหรับเรา</h3></div>
+        <p>โรงพยาบาลกรุงเทพหาดใหญ่จะใช้ข้อมูลที่จำเป็นเพื่อการประเมินความเสี่ยง การติดตามผล และการพัฒนาคุณภาพบริการ โดยข้อมูลติดต่อจะถูกขอเพิ่มเติมเฉพาะกรณีที่ท่านเลือกให้โรงพยาบาลติดต่อกลับ</p>
+        <a id="privacyLink" target="_blank" rel="noopener">อ่านนโยบายความเป็นส่วนตัวฉบับเต็ม ›</a>
+      </div>
+      <div class="pdpa-data-card">
+        <h3>ข้อมูลที่เราเก็บ</h3>
+        <div><span class="mini-icon" aria-hidden="true">▤</span><p><strong>คำตอบในแบบประเมิน</strong></p></div>
+        <div><span class="mini-icon" aria-hidden="true">☎</span><p><strong>ข้อมูลติดต่อ</strong> (เฉพาะกรณีที่ท่านยินยอม)</p></div>
+        <div><span class="mini-icon" aria-hidden="true">▣</span><p><strong>ข้อมูลการใช้งานเว็บไซต์</strong> เช่น ประเภทเบราว์เซอร์และอุปกรณ์ (แบบกว้าง ๆ)</p></div>
+        <div><span class="mini-icon" aria-hidden="true">⌖</span><p><strong>ไม่มีการเก็บข้อมูลตำแหน่งที่ตั้ง (GPS)</strong></p></div>
+      </div>
+      <label class="consent-row mockup-consent"><input id="pdpaConsent" type="checkbox"><span>ข้าพเจ้าได้อ่านและยินยอมให้ใช้ข้อมูลตามที่ระบุ เพื่อการประเมินและพัฒนาเครื่องมือ</span></label>
+      <div id="pdpaError" class="error-box hidden" role="alert"></div>
+      <button id="pdpaContinue" class="btn mockup-primary" type="button">ยอมรับและเริ่มประเมิน</button>
+      <button id="pdpaCancel" class="btn mockup-secondary" type="button">ยกเลิก</button>
+    </div>
+  </section>
+
+  <section id="profileScreen" class="screen hidden">
+    <div class="card compact-card">
+      <div class="step-heading"><span class="step-pill">ก่อนเริ่มคำถาม</span><span class="step-count">ประมาณ 1 นาที</span></div>
+      <h2>ขอข้อมูลทั่วไปของเด็กเพียงเล็กน้อย</h2>
+      <p class="muted">ใช้เพียงช่วงอายุและพื้นที่กว้าง ๆ เพื่อช่วยดูผลตามช่วงวัย ไม่ต้องกรอกชื่อเด็กหรือที่อยู่บ้าน</p>
+      <div class="form-grid">
+        <div class="field"><label for="ageBand">ช่วงอายุเด็ก</label><select id="ageBand" required><option value="">เลือกช่วงอายุ</option><option value="0-2">0–2 ปี</option><option value="3-5">3–5 ปี</option><option value="6-10">6–10 ปี</option><option value="11-15">11–15 ปี</option><option value="16-18">16–18 ปี</option></select></div>
+        <div class="field"><label for="province">จังหวัด</label><select id="province" required><option value="">กำลังโหลด…</option></select></div>
+      </div>
+      <div class="field" style="margin-top:16px"><label for="district">อำเภอ <span class="muted">(ไม่บังคับ)</span></label><input id="district" maxlength="80" autocomplete="off" placeholder="เช่น หาดใหญ่"><small>ไม่ต้องกรอกที่อยู่บ้าน เลขที่บ้าน หรือพิกัด</small></div>
+      <div class="hp" aria-hidden="true"><label for="website">เว็บไซต์</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div id="profileError" class="error-box hidden" role="alert"></div>
+      <div class="actions"><button id="profileBack" class="btn btn-ghost">‹ ย้อนกลับ</button><button id="profileNext" class="btn btn-primary">เริ่ม 9 คำถาม ›</button></div>
+    </div>
+  </section>
+
+  <section id="questionScreen" class="screen hidden">
+    <div class="progress-wrap">
+      <div class="progress-meta"><div><strong id="questionSectionLabel">ส่วนที่ 1</strong><span id="questionProgress">คำถาม 1 จาก 9</span></div><span class="progress-count-badge" id="questionProgressBadge">1/9</span></div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </div>
+    <div id="questionCard" class="question-card" aria-live="polite"></div>
+    <div class="actions question-actions"><button id="questionBack" class="btn btn-ghost">‹ ย้อนกลับ</button><button id="questionNext" class="btn btn-primary" disabled>ถัดไป ›</button></div>
+  </section>
+
+  <section id="safetyFollowup" class="screen hidden" data-section-code="Part C · Safety & Management">
+    <div class="card">
+      <div class="progress-wrap safety-progress"><div class="progress-meta"><div><strong>ส่วนที่ 3 จาก 3 · ความปลอดภัย</strong><span>ไม่คิดคะแนน Risk Index</span></div><span class="progress-count-badge">Part C</span></div><div class="progress-track"><div class="progress-bar full"></div></div></div>
+      <div class="section-icon-heading"><span class="section-icon safety" aria-hidden="true">!</span><div><p class="eyebrow">คำถามเพิ่มเติมเพื่อความปลอดภัย</p><h2>ตรวจดูสัญญาณที่ต้องดูแลเร่งด่วน</h2></div></div>
+      <p class="muted">ส่วนนี้ไม่เพิ่มคะแนน ใช้เพื่อแยกอาการฉุกเฉิน ประวัติแพ้รุนแรง และความพร้อมของครอบครัว</p>
+      <fieldset class="field safety-field"><legend><strong>1. ตอนนี้เด็กมีอาการรุนแรงหรือไม่?</strong><span>เช่น หายใจลำบากมาก คอหรือลิ้นบวม หน้ามืด เป็นลม หมดสติ หรือทรุดลงอย่างรวดเร็ว</span></legend><label><input type="radio" name="emergencyNow" value="no"> ไม่มีอาการรุนแรงขณะนี้</label><label><input type="radio" name="emergencyNow" value="yes"> กำลังมีอาการรุนแรงขณะนี้</label></fieldset>
+      <fieldset class="field safety-field"><legend><strong>2. ในอดีตเด็กเคยมีอาการแพ้รุนแรงหรือไม่?</strong><span>เช่น หายใจลำบาก คอบวม หน้ามืด หรือหมดสติ หลังอาหาร ยา หรือแมลงต่อย</span></legend><label><input type="radio" name="previousSevereReaction" value="no"> ไม่เคย</label><label><input type="radio" name="previousSevereReaction" value="yes"> เคย</label><label><input type="radio" name="previousSevereReaction" value="unknown"> ไม่แน่ใจ</label></fieldset>
+      <div id="severeHistoryFields" class="conditional-panel hidden">
+        <div class="field"><label for="reactionTrigger">สิ่งที่สัมพันธ์กับอาการรุนแรงมากที่สุด</label><select id="reactionTrigger"><option value="">เลือก</option><option value="food">อาหาร</option><option value="drug">ยา</option><option value="insect">แมลงต่อย</option><option value="unsure">ไม่แน่ใจ</option></select></div>
+        <div class="field" style="margin-top:16px"><label for="epinephrineStatus">สถานะยาฉุกเฉิน adrenaline/epinephrine ตามแผนแพทย์</label><select id="epinephrineStatus"><option value="">เลือก</option><option value="HAS">มีตามที่แพทย์จัดให้</option><option value="NO">เคยได้รับคำแนะนำแต่ขณะนี้ไม่มี/เข้าถึงไม่ได้</option><option value="NOT_PRESCRIBED">แพทย์ยังไม่ได้จัดให้</option><option value="UNKNOWN">ไม่แน่ใจ</option></select></div>
+        <fieldset class="field safety-field"><legend><strong>ครอบครัวมีแผนรับมือภาวะแพ้รุนแรงที่ทีมดูแลอธิบายไว้หรือไม่?</strong></legend><label><input type="radio" name="hasEmergencyPlan" value="yes"> มี</label><label><input type="radio" name="hasEmergencyPlan" value="no"> ไม่มี</label><label><input type="radio" name="hasEmergencyPlan" value="unknown"> ไม่แน่ใจ</label></fieldset>
+      </div>
+      <div id="foodAccessFields" class="conditional-panel hidden"><fieldset class="field safety-field"><legend><strong>ครอบครัวมีข้อจำกัดด้านค่าใช้จ่ายหรือการเข้าถึงอาหารที่เหมาะสมสำหรับเด็กหรือไม่?</strong></legend><label><input type="radio" name="foodAccessStatus" value="NONE"> ไม่มี</label><label><input type="radio" name="foodAccessStatus" value="BARRIER"> มีข้อจำกัด</label><label><input type="radio" name="foodAccessStatus" value="DECLINE"> ไม่ต้องการตอบ</label></fieldset></div>
+      <div id="safetyEmergencyNotice" class="emergency-card hidden"><span class="emergency-icon" aria-hidden="true">!</span><div><strong>หากอาการรุนแรงกำลังเกิดขึ้น</strong><br>ให้โทร 1669 หรือไปห้องฉุกเฉินทันที ไม่ต้องรอผลแบบประเมินหรือการติดต่อกลับ</div></div>
+      <div id="safetyError" class="error-box hidden" role="alert"></div>
+      <div class="actions question-actions"><button id="safetyBack" class="btn btn-ghost">‹ ย้อนกลับ</button><button id="safetySubmit" class="btn btn-primary">ดูผลประเมิน</button></div>
+    </div>
+  </section>
+
+  <section id="processingScreen" class="screen hidden"><div class="card processing-card"><div class="processing-pulse" aria-hidden="true"></div><h2>กำลังสรุปผลของลูก</h2><p class="muted">กำลังประมวลผลและบันทึกข้อมูล กรุณาไม่ปิดหน้านี้หรือกดส่งซ้ำ</p></div></section>
+
+  <section id="resultScreen" class="screen hidden">
+    <div class="card result-summary-card">
+      <p class="eyebrow">ผลการประเมินของคุณ</p>
+      <div class="risk-layout"><div id="riskGauge" class="risk-gauge"><div class="gauge-inner"><div id="riskNumber" class="gauge-number">0</div><div class="gauge-denom">/ 100</div></div></div><div class="result-copy"><p class="score-kicker">คะแนนสรุปจากแบบประเมิน U-PMAS · Risk Index</p><h2 id="riskTitle"></h2><p id="resultDisclaimer" class="muted"></p><p id="certaintyText" class="notice warning hidden"></p></div></div>
+      <div id="safetyResult"></div>
+      <div class="result-toolbar print-hide"><button id="printResultButton" class="result-tool" type="button"><span aria-hidden="true">▣</span> พิมพ์ผลลัพธ์</button><button id="savePdfButton" class="result-tool" type="button"><span aria-hidden="true">⇩</span> บันทึกเป็น PDF</button></div>
+      <p id="printHint" class="print-hint hidden print-hide" role="status"></p>
+    </div>
+
+    <div class="card factor-section-card">
+      <div class="section-icon-heading"><span class="section-icon factors" aria-hidden="true">i</span><div><p class="eyebrow">เข้าใจผลของลูกให้มากขึ้น</p><h2>ปัจจัยที่พบจากคำตอบของคุณ</h2></div></div>
+      <p class="muted">ทำไมปัจจัยเหล่านี้จึงเกี่ยวข้องกับความเสี่ยง และสิ่งที่ผู้ปกครองทำต่อได้โดยไม่ต้องกังวลเกินความจำเป็น</p>
+      <div id="reasonList" class="risk-factor-grid"></div>
+      <p class="context-note">รูปแบบการให้นมในช่วง 3–4 เดือนแรกเป็นข้อมูลประกอบเท่านั้น และไม่เพิ่มคะแนน Risk Index</p>
+    </div>
+
+    <div class="card next-steps-card">
+      <div class="section-icon-heading"><span class="section-icon home" aria-hidden="true">⌂</span><div><p class="eyebrow">ควรทำอย่างไรต่อ</p><h2>สิ่งที่คุณสามารถทำได้ตอนนี้</h2></div></div>
+      <div class="next-steps-grid">
+        <article class="next-step-card"><span class="step-card-icon" aria-hidden="true">✓</span><h3>ดูแลสิ่งแวดล้อม</h3><p>หลีกเลี่ยงควันบุหรี่ ลดความชื้นและเชื้อราในบริเวณที่เด็กอยู่เป็นประจำ</p></article>
+        <article class="next-step-card"><span class="step-card-icon" aria-hidden="true">♡</span><h3>สังเกตอาการที่เป็นซ้ำ</h3><p>จดว่าอาการเกิดเมื่อไร เกิดหลังอาหารหรือสิ่งกระตุ้นใด และรบกวนการนอนหรือกิจกรรมหรือไม่</p></article>
+        <article class="next-step-card"><span class="step-card-icon" aria-hidden="true">✚</span><h3>หากอาการเป็นบ่อย</h3><p>ปรึกษากุมารแพทย์เพื่อประเมินสาเหตุและแนวทางดูแลที่เหมาะสมกับเด็กแต่ละคน</p></article>
+      </div>
+    </div>
+
+    <div class="card caring-card">
+      <div class="doctor-support"><span class="doctor-symbol" aria-hidden="true">✚</span><div><p class="eyebrow">หากต้องการปรึกษาแพทย์</p><h2>โรงพยาบาลกรุงเทพหาดใหญ่พร้อมดูแลต่อ</h2><p id="caringText"></p></div></div>
+      <div class="actions print-hide"><a id="specialistLink" class="btn btn-secondary" target="_blank" rel="noopener">ดูข้อมูลแพทย์ ›</a><a class="btn btn-ghost" href="tel:1719">โทร 1719</a></div>
+      <div class="callback-strip print-hide"><div><strong>ต้องการให้โรงพยาบาลติดต่อกลับ?</strong><span>กรอกข้อมูลติดต่อได้ที่นี่ โดยสมัครใจ</span></div><button id="requestContactButton" class="btn btn-primary">กรอกข้อมูลติดต่อ</button></div>
+      <div class="actions print-hide"><button id="finishButton" class="btn btn-ghost">จบการประเมินโดยไม่ขอติดต่อกลับ</button></div>
+    </div>
+  </section>
+
+  <section id="contactScreen" class="screen hidden">
+    <div class="card contact-form"><div class="section-icon-heading"><span class="section-icon phone" aria-hidden="true">☎</span><div><p class="eyebrow">ติดต่อกลับตามความสมัครใจ</p><h2>ให้ทีมโรงพยาบาลกรุงเทพหาดใหญ่ติดต่อกลับ</h2></div></div><p class="muted">ข้อมูลส่วนนี้จะถูกเก็บแยกจากข้อมูลแบบประเมิน และใช้เพื่อการติดต่อกลับตามคำขอของท่าน</p>
+      <div class="field"><label for="parentName">ชื่อผู้ปกครอง</label><input id="parentName" maxlength="120" autocomplete="name"></div>
+      <div class="field" style="margin-top:14px"><label for="contactPhone">เบอร์โทรศัพท์</label><input id="contactPhone" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx"></div>
+      <div class="field" style="margin-top:14px"><label for="preferredContactTime">ช่วงเวลาที่สะดวก</label><select id="preferredContactTime"><option value="anytime">เวลาใดก็ได้</option><option value="morning">ช่วงเช้า</option><option value="afternoon">ช่วงบ่าย</option><option value="evening">ช่วงเย็น</option></select></div>
+      <label class="consent-row"><input id="contactConsent" type="checkbox"><span>ยินยอมให้โรงพยาบาลกรุงเทพหาดใหญ่ใช้ชื่อ หมายเลขโทรศัพท์ และผลแบบประเมินนี้เพื่อดำเนินการติดต่อกลับตามที่ข้าพเจ้าร้องขอ</span></label>
+      <div id="contactError" class="error-box hidden" role="alert"></div>
+      <div class="actions"><button id="contactBack" class="btn btn-ghost">‹ กลับไปดูผล</button><button id="contactSubmit" class="btn btn-primary">ส่งคำขอติดต่อกลับ</button></div>
+    </div>
+  </section>
+
+  <section id="doneScreen" class="screen hidden">
+    <div class="card done-card">
+      <div class="final-family-visual" aria-hidden="true"><img class="final-family-image" src="assets/family-thankyou.png" alt="" loading="lazy" decoding="async"></div>
+      <p class="eyebrow">ขอบคุณที่ให้ความไว้วางใจ</p><h2 id="doneTitle">ขอบคุณที่ใส่ใจสุขภาพของลูก</h2><p id="doneMessage" class="lead"></p>
+      <blockquote>“ทุกช่วงวัยมีความหมาย เราพร้อมดูแลสุขภาพลูกของคุณไปด้วยกัน”</blockquote>
+      <div class="footer-links"><a id="donePrivacyLink" href="https://www.bangkokhospital.com/th/hatyai/page/privacy-policy-bhh" target="_blank" rel="noopener">นโยบายความเป็นส่วนตัว</a><a href="https://www.bangkokhospital.com/th/hatyai" target="_blank" rel="noopener">เว็บไซต์โรงพยาบาลกรุงเทพหาดใหญ่</a><a href="tel:1719">ติดต่อเรา 1719</a></div>
+      <div class="mini-brand"><img src="https://static.bangkokhospital.com/uploads/2024/04/backupcoverimg.jpg" alt="Bangkok Hospital" referrerpolicy="no-referrer"><span>ดูแลให้ดีที่สุด ในแบบที่เป็นคุณ</span></div>
+    </div>
+  </section>
+
+  <div id="globalError" class="error-box hidden" role="alert"></div>
+  <p class="footer-note print-hide">U-PMAS Short 3.0 · แบบประเมินเบื้องต้น ไม่ใช้แทนการวินิจฉัยหรือการตรวจโดยแพทย์</p>
+</main>
+<script src="config.js"></script><script src="api.js"></script><script src="ux.js"></script><script src="app.js"></script>
+</body>
+</html>
