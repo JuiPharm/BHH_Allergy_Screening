@@ -27,7 +27,7 @@ main{width:min(820px,calc(100% - 22px));margin:20px auto 46px}.screen{display:bl
 @media(max-width:640px){.header-inner,main{width:min(100% - 16px,820px)}.site-header{position:relative}.logo-crop{width:116px;height:38px}.hospital-logo{width:200px}.brand-copy{display:none}.help-link{padding:7px 10px;font-size:.84rem}.hero-card,.card,.question-card{border-radius:18px;padding:18px}.hero-card{padding-top:22px}.hero-grid{gap:14px}.hero-visual{min-height:245px;border-radius:20px}.hero-family-symbol{transform:scale(.82);margin-bottom:25px}.visual-caption{font-size:.86rem}.form-grid{grid-template-columns:1fr}.actions:not(.question-actions){flex-direction:column;align-items:stretch}.actions:not(.question-actions) .btn{width:100%}.question-actions{margin-left:-4px;margin-right:-4px}.question-actions .btn{min-width:118px}.question-card{min-height:365px}.choice{min-height:55px}.risk-gauge{width:165px}.result-toolbar{grid-template-columns:1fr 1fr}.next-step-card{padding:14px}.mini-brand{flex-direction:column}.footer-links{flex-direction:column;gap:8px}.privacy-box{padding:16px}.privacy-heading{align-items:flex-start}.privacy-lock{width:44px;height:44px}.benefit-item{padding:9px 0}}
 @media(max-width:380px){.question-actions{gap:7px}.question-actions .btn{min-width:0;flex:1;padding-inline:10px}.result-toolbar{grid-template-columns:1fr}.hero-family-symbol{transform:scale(.74)}}
 @media print{
-  @page{size:A4;margin:12mm}.print-hide,.site-header,.brand-bar,.footer-note,#systemModeBanner{display:none!important}body{background:#fff;color:#111}.screen.hidden{display:none!important}main{width:100%;margin:0}.card{box-shadow:none;border:1px solid #d8e0e6;break-inside:avoid;margin-bottom:10mm}.result-summary-card,.factor-section-card,.next-steps-card,.caring-card{display:block!important}.risk-gauge{-webkit-print-color-adjust:exact;print-color-adjust:exact}.risk-factor-card,.next-step-card,.caring-card,.notice,.emergency-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}.callback-strip{display:none!important}.next-steps-grid{grid-template-columns:repeat(3,1fr)}a{text-decoration:none;color:#111}.print-hint{display:none!important}
+  @page{size:A4;margin:12mm}.print-hide,.site-header,.brand-bar,.footer-note{display:none!important}body{background:#fff;color:#111}.screen.hidden{display:none!important}main{width:100%;margin:0}.card{box-shadow:none;border:1px solid #d8e0e6;break-inside:avoid;margin-bottom:10mm}.result-summary-card,.factor-section-card,.next-steps-card,.caring-card{display:block!important}.risk-gauge{-webkit-print-color-adjust:exact;print-color-adjust:exact}.risk-factor-card,.next-step-card,.caring-card,.notice,.emergency-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}.callback-strip{display:none!important}.next-steps-grid{grid-template-columns:repeat(3,1fr)}a{text-decoration:none;color:#111}.print-hint{display:none!important}
 }
 
 /* 3.0.2 visual fidelity assets */
@@ -267,3 +267,37 @@ main{
 .brand-lockup{position:absolute;left:13px;top:8px;height:42px;display:flex;align-items:center}
 .hospital-logo{width:145px;height:42px;object-fit:contain;object-position:left center}
 .menu-button{position:absolute;right:10px;top:9px}
+
+/* Functional hamburger drawer + responsive layout */
+body{overflow-x:hidden}
+.menu-backdrop{position:fixed;inset:0;background:rgba(7,62,112,.28);z-index:29;backdrop-filter:blur(2px)}
+.menu-drawer{position:fixed;top:0;right:0;bottom:0;width:min(340px,88vw);background:#fff;z-index:30;box-shadow:-18px 0 40px rgba(7,62,112,.18);transform:translateX(105%);transition:transform .2s ease;display:flex;flex-direction:column;overflow:auto;padding-bottom:max(20px,env(safe-area-inset-bottom))}
+.menu-drawer.is-open{transform:translateX(0)}
+.menu-drawer-header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--mockup-line);color:var(--mockup-deep);flex:0 0 auto}
+.menu-drawer-header strong{font-size:1rem}
+.menu-close{width:40px;height:40px;border:0;background:#f3f8fc;border-radius:11px;color:var(--mockup-deep);font-size:1.7rem;line-height:1;cursor:pointer}
+.menu-nav{display:grid;padding:10px}
+.menu-item{min-height:52px;display:flex;align-items:center;gap:12px;padding:12px 13px;border:0;border-radius:12px;background:transparent;color:var(--mockup-deep);font-weight:780;text-decoration:none;text-align:left;cursor:pointer}
+.menu-item:hover,.menu-item:focus-visible{background:#eef7fd;outline:none}
+.menu-item>span:first-child{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#e8f5ff;color:var(--mockup-blue);font-weight:900;flex:0 0 auto}
+@media(min-width:700px){
+  .site-header{width:min(760px,calc(100% - 32px));margin:14px auto 0;border-radius:14px 14px 0 0;overflow:hidden;box-shadow:0 0 28px rgba(16,74,121,.12)}
+  .header-inner{width:100%}
+  main{width:min(760px,calc(100% - 32px));margin:0 auto 28px}
+  .mobile-shell{max-width:760px;margin-inline:auto}
+  .menu-drawer{top:14px;bottom:14px;border-radius:16px 0 0 16px}
+}
+@media(min-width:1024px){
+  body{background:linear-gradient(180deg,#eef4f8 0,#f6fafd 55%,#eaf3f8 100%)}
+  .site-header{width:min(760px,calc(100% - 48px))}
+  main{width:min(760px,calc(100% - 48px))}
+  .mobile-shell{padding-left:28px;padding-right:28px}
+  .menu-drawer{width:360px;top:20px;bottom:20px}
+}
+@media(max-width:380px){
+  .mobile-shell{padding-left:11px;padding-right:11px}
+  .landing-intro h1{font-size:1.9rem}
+  .landing-intro h2{font-size:1rem}
+  .hero-photo-frame{height:275px}
+  .mockup-primary{font-size:.82rem}
+}

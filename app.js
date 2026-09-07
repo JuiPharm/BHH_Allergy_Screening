@@ -18,11 +18,17 @@
   [
     'landingScreen','pdpaScreen','profileScreen','questionScreen','safetyFollowup','processingScreen','resultScreen','contactScreen','doneScreen',
     'pdpaConsent','pdpaContinue','pdpaCancel','pdpaError','privacyLink','startButton','landingError','ageBand','province','district','website','profileError','profileBack','profileNext',
-    'questionSectionLabel','questionProgress','questionProgressBadge','progressBar','questionCard','questionBack','questionNext','reactionTrigger','epinephrineStatus','severeHistoryFields','foodAccessFields','safetyEmergencyNotice','safetyError','safetyBack','safetySubmit','systemModeBanner',
+    'questionSectionLabel','questionProgress','questionProgressBadge','progressBar','questionCard','questionBack','questionNext','reactionTrigger','epinephrineStatus','severeHistoryFields','foodAccessFields','safetyEmergencyNotice','safetyError','safetyBack','safetySubmit',
     'riskGauge','riskNumber','riskTitle','resultDisclaimer','certaintyText','safetyResult','reasonList','caringText','specialistLink','printResultButton','savePdfButton','printHint',
     'requestContactButton','finishButton','parentName','contactPhone','preferredContactTime','contactConsent','contactError','contactBack','contactSubmit',
     'doneTitle','doneMessage','donePrivacyLink','globalError'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
+  var menuButton = document.getElementById('menuButton');
+  var menuDrawer = document.getElementById('menuDrawer');
+  var menuBackdrop = document.getElementById('menuBackdrop');
+  var menuClose = document.getElementById('menuClose');
+  var menuPrivacy = document.getElementById('menuPrivacy');
+  var RESULT_STATE_KEY = 'UPMAS_RESULT_STATE';
 
   window.UPMAS = {
     receiveJsonp: function (data) {
@@ -37,7 +43,41 @@
     ['landingScreen','pdpaScreen','profileScreen','questionScreen','safetyFollowup','processingScreen','resultScreen','contactScreen','doneScreen'].forEach(function (key) {
       el[key].classList.toggle('hidden', key !== id);
     });
+    if (id === 'resultScreen') {
+      try { history.replaceState({ screen:'result' }, '', '#result'); } catch (_) {}
+    } else if (id === 'landingScreen' && window.location.hash === '#result') {
+      try { history.replaceState({ screen:'landing' }, '', window.location.pathname + window.location.search); } catch (_) {}
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function persistResultState() {
+    if (!state.assessment) return;
+    try {
+      sessionStorage.setItem(RESULT_STATE_KEY, JSON.stringify({
+        caseId: state.caseId || '',
+        assessment: state.assessment,
+        savedAt: Date.now()
+      }));
+    } catch (_) {}
+  }
+
+  function restoreResultState() {
+    try {
+      var raw = sessionStorage.getItem(RESULT_STATE_KEY);
+      if (!raw) return false;
+      var saved = JSON.parse(raw);
+      if (!saved || !saved.assessment || typeof saved.assessment !== 'object') return false;
+      state.caseId = saved.caseId || '';
+      state.assessment = saved.assessment;
+      renderResult(state.assessment);
+      showOnly('resultScreen');
+      return true;
+    } catch (_) { return false; }
+  }
+
+  function clearResultState() {
+    try { sessionStorage.removeItem(RESULT_STATE_KEY); } catch (_) {}
   }
 
   function setError(node, message) {
@@ -203,6 +243,7 @@
       fetch(config.API_URL, { method:'POST', mode:'no-cors', body:transport.buildPostBody('assessment', buildAssessmentPayload(state.submissionToken)), referrerPolicy:'no-referrer' }).catch(function(){});
       var receipt = await pollReceipt('status', state.submissionToken);
       state.caseId = receipt.caseId; state.assessment = receipt.assessment;
+      persistResultState();
       renderResult(receipt.assessment); showOnly('resultScreen');
     } catch (error) { setError(el.globalError, (error&&error.message)||'ไม่สามารถบันทึกข้อมูลได้'); showOnly('safetyFollowup'); }
   }
@@ -286,6 +327,36 @@
     }
   }
 
+  function closeMenu() {
+    menuDrawer.classList.remove('is-open');
+    menuDrawer.setAttribute('aria-hidden', 'true');
+    menuBackdrop.classList.add('hidden');
+    menuBackdrop.setAttribute('aria-hidden', 'true');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'เปิดเมนู');
+    document.body.classList.remove('menu-open');
+  }
+
+  function openMenu() {
+    menuDrawer.classList.add('is-open');
+    menuDrawer.setAttribute('aria-hidden', 'false');
+    menuBackdrop.classList.remove('hidden');
+    menuBackdrop.setAttribute('aria-hidden', 'false');
+    menuButton.setAttribute('aria-expanded', 'true');
+    menuButton.setAttribute('aria-label', 'ปิดเมนู');
+    document.body.classList.add('menu-open');
+  }
+
+  function toggleMenu() {
+    if (menuDrawer.classList.contains('is-open')) closeMenu(); else openMenu();
+  }
+
+  function handleMenuAction(action) {
+    if (action === 'home') showOnly('landingScreen');
+    if (action === 'assessment') showOnly('pdpaScreen');
+    closeMenu();
+  }
+
   async function bootstrap() {
     setError(el.globalError, '');
     if (!config || !config.API_URL || /REPLACE_WITH/.test(config.API_URL)) {
@@ -293,20 +364,31 @@
     }
     try {
       state.bootstrap = await loadJsonp('bootstrap');
-      el.systemModeBanner.classList.toggle('hidden', state.bootstrap.systemMode !== 'UAT');
-      if (state.bootstrap.systemMode === 'UAT') el.systemModeBanner.textContent = 'UAT MODE — ใช้ข้อมูลทดสอบเท่านั้น ระบบยังไม่เปิดรับข้อมูลจริงจนกว่าจะผ่าน Production Readiness Gate';
       el.privacyLink.href = state.bootstrap.privacyUrl;
       if (el.donePrivacyLink) el.donePrivacyLink.href = state.bootstrap.privacyUrl;
       el.specialistLink.href = state.bootstrap.specialistUrl;
+      el.specialistLink.addEventListener('click', function () { persistResultState(); try { history.replaceState({ screen:'result' }, '', '#result'); } catch (_) {} });
       el.province.textContent = '';
       var empty = document.createElement('option'); empty.value = ''; empty.textContent = 'เลือกจังหวัด'; el.province.appendChild(empty);
       (state.bootstrap.provinces || []).forEach(function (item) { var o = document.createElement('option'); o.value = item.code; o.textContent = item.label; el.province.appendChild(o); });
+      if (window.location.hash === '#result') restoreResultState();
     } catch (error) {
       setError(el.globalError, error.message); el.startButton.disabled = true;
     }
   }
 
-  el.startButton.addEventListener('click', function () { setError(el.landingError, ''); showOnly('pdpaScreen'); });
+  menuButton.addEventListener('click', toggleMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuBackdrop.addEventListener('click', closeMenu);
+  menuDrawer.querySelectorAll('[data-menu-action]').forEach(function (item) {
+    item.addEventListener('click', function () { handleMenuAction(item.getAttribute('data-menu-action')); });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && menuDrawer.classList.contains('is-open')) closeMenu();
+  });
+  menuPrivacy.addEventListener('click', closeMenu);
+
+  el.startButton.addEventListener('click', function () { clearResultState(); try { history.replaceState({ screen:'pdpa' }, '', window.location.pathname + window.location.search); } catch (_) {} setError(el.landingError, ''); showOnly('pdpaScreen'); });
   el.pdpaContinue.addEventListener('click', function () {
     setError(el.pdpaError, '');
     if (!el.pdpaConsent.checked) { setError(el.pdpaError, 'กรุณาอ่านข้อมูลและให้ความยินยอมก่อนเริ่มประเมิน'); return; }
@@ -338,6 +420,10 @@
     el.doneTitle.textContent = 'บันทึกการประเมินเรียบร้อยแล้ว';
     el.doneMessage.textContent = 'ขอบคุณที่ให้ความสำคัญกับสุขภาพของลูก หากมีข้อกังวลเพิ่มเติมสามารถติดต่อโรงพยาบาลกรุงเทพหาดใหญ่ได้ทุกเมื่อ';
     showOnly('doneScreen');
+  });
+
+  window.addEventListener('pageshow', function () {
+    if (window.location.hash === '#result' && !state.assessment) restoreResultState();
   });
 
   bootstrap();
